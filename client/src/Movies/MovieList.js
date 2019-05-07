@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
+import styled from 'styled-components';
+
+const MovieListStyles = styled.div`
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+`
 
 export default class MovieList extends Component {
   constructor(props) {
@@ -24,11 +31,12 @@ export default class MovieList extends Component {
 
   render() {
     return (
-      <div className="movie-list">
+      <MovieListStyles>
         {this.state.movies.map(movie => (
+
           <MovieDetails key={movie.id} movie={movie} />
         ))}
-      </div>
+      </MovieListStyles>
     );
   }
 }
