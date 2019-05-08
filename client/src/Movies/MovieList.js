@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import MovieCard from './MovieCard';
+import styled from 'styled-components';
+
+const MovieListStyles = styled.div`
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+`
 
 export default class MovieList extends Component {
   constructor(props) {
@@ -22,33 +31,20 @@ export default class MovieList extends Component {
 
   render() {
     return (
-      <div className="movie-list">
+      <MovieListStyles>
         {this.state.movies.map(movie => (
+
           <MovieDetails key={movie.id} movie={movie} />
         ))}
-      </div>
+      </MovieListStyles>
     );
   }
 }
 
 function MovieDetails({ movie }) {
-  const { title, director, metascore, stars } = movie;
   return (
-    <div className="movie-card">
-      <h2>{title}</h2>
-      <div className="movie-director">
-        Director: <em>{director}</em>
-      </div>
-      <div className="movie-metascore">
-        Metascore: <strong>{metascore}</strong>
-      </div>
-      <h3>Actors</h3>
-
-      {stars.map(star => (
-        <div key={star} className="movie-star">
-          {star}
-        </div>
-      ))}
-    </div>
+    <Link to={`/movies/${movie.id}`}>
+      <MovieCard movie={movie} />
+    </Link>
   );
 }
